@@ -1,0 +1,311 @@
+/**
+ * Default Tema Bileşen Stilleri
+ * ---------------------------
+ * Bu dosya, default tema için ortak bileşenlerin temel stillerini içerir.
+ * Her bileşen, tema değişkenlerini kullanarak stillendirilmiştir.
+ */
+
+/* Düğmeler */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  border: none;
+}
+
+.btn:focus {
+  outline: 2px solid hsl(var(--color-ring) / 0.6);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: hsl(var(--color-primary));
+  color: hsl(var(--color-primary-foreground));
+}
+
+.btn-primary:hover {
+  background-color: hsl(var(--color-primary) / 0.9);
+}
+
+.btn-secondary {
+  background-color: hsl(var(--color-secondary));
+  color: hsl(var(--color-secondary-foreground));
+}
+
+.btn-secondary:hover {
+  background-color: hsl(var(--color-secondary) / 0.8);
+}
+
+.btn-accent {
+  background-color: hsl(var(--color-accent));
+  color: hsl(var(--color-accent-foreground));
+}
+
+.btn-accent:hover {
+  background-color: hsl(var(--color-accent) / 0.9);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: hsl(var(--color-foreground));
+}
+
+.btn-ghost:hover {
+  background-color: hsl(var(--color-muted));
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid hsl(var(--color-border));
+  color: hsl(var(--color-foreground));
+}
+
+.btn-outline:hover {
+  background-color: hsl(var(--color-muted));
+}
+
+.btn-destructive {
+  background-color: hsl(var(--color-destructive));
+  color: hsl(var(--color-destructive-foreground));
+}
+
+.btn-destructive:hover {
+  background-color: hsl(var(--color-destructive) / 0.9);
+}
+
+.btn-sm {
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--font-size-xs);
+}
+
+.btn-lg {
+  padding: var(--spacing-3) var(--spacing-6);
+  font-size: var(--font-size-base);
+}
+
+.btn-icon {
+  padding: var(--spacing-2);
+}
+
+/* Kartlar */
+.card {
+  background-color: hsl(var(--color-card));
+  color: hsl(var(--color-card-foreground));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--transition-base);
+  overflow: hidden;
+}
+
+.card-hover:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.card-header {
+  padding: var(--spacing-4);
+  border-bottom: 1px solid hsl(var(--color-border));
+}
+
+.card-footer {
+  padding: var(--spacing-4);
+  border-top: 1px solid hsl(var(--color-border));
+}
+
+.card-body {
+  padding: var(--spacing-4);
+}
+
+/* Form Öğeleri */
+.form-group {
+  margin-bottom: var(--spacing-4);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--spacing-1);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: hsl(var(--color-foreground));
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  background-color: hsl(var(--color-input));
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-md);
+  color: hsl(var(--color-foreground));
+  transition: all var(--transition-base);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: hsl(var(--color-primary));
+  box-shadow: 0 0 0 2px hsl(var(--color-primary) / 0.2);
+}
+
+.form-error {
+  border-color: hsl(var(--color-destructive));
+}
+
+.form-error-message {
+  margin-top: var(--spacing-1);
+  font-size: var(--font-size-xs);
+  color: hsl(var(--color-destructive));
+}
+
+.form-description {
+  margin-top: var(--spacing-1);
+  font-size: var(--font-size-xs);
+  color: hsl(var(--color-muted-foreground));
+}
+
+/* Diyaloglar */
+.dialog-overlay {
+  background-color: hsl(0 0% 0% / 0.4);
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+
+.dialog-content {
+  background-color: hsl(var(--color-popover));
+  color: hsl(var(--color-popover-foreground));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  max-width: 32rem;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  z-index: 51;
+  transition: all var(--transition-fast);
+}
+
+.dialog-header {
+  padding: var(--spacing-4);
+  border-bottom: 1px solid hsl(var(--color-border));
+}
+
+.dialog-footer {
+  padding: var(--spacing-4);
+  border-top: 1px solid hsl(var(--color-border));
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+}
+
+.dialog-body {
+  padding: var(--spacing-4);
+}
+
+/* Bildirimler */
+.alert {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  border-left: 4px solid;
+}
+
+.alert-info {
+  background-color: hsl(var(--color-info) / 0.1);
+  border-left-color: hsl(var(--color-info));
+  color: hsl(var(--color-foreground));
+}
+
+.alert-success {
+  background-color: hsl(var(--color-success) / 0.1);
+  border-left-color: hsl(var(--color-success));
+  color: hsl(var(--color-foreground));
+}
+
+.alert-warning {
+  background-color: hsl(var(--color-warning) / 0.1);
+  border-left-color: hsl(var(--color-warning));
+  color: hsl(var(--color-foreground));
+}
+
+.alert-error {
+  background-color: hsl(var(--color-destructive) / 0.1);
+  border-left-color: hsl(var(--color-destructive));
+  color: hsl(var(--color-foreground));
+}
+
+/* Rozetler */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--spacing-2);
+  height: var(--spacing-5);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+}
+
+.badge-primary {
+  background-color: hsl(var(--color-primary) / 0.1);
+  color: hsl(var(--color-primary));
+}
+
+.badge-secondary {
+  background-color: hsl(var(--color-secondary) / 0.8);
+  color: hsl(var(--color-secondary-foreground));
+}
+
+.badge-success {
+  background-color: hsl(var(--color-success) / 0.1);
+  color: hsl(var(--color-success));
+}
+
+.badge-warning {
+  background-color: hsl(var(--color-warning) / 0.1);
+  color: hsl(var(--color-warning) / 0.8);
+}
+
+.badge-error {
+  background-color: hsl(var(--color-destructive) / 0.1);
+  color: hsl(var(--color-destructive));
+}
+
+/* Navigasyon */
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  color: hsl(var(--color-foreground) / 0.8);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background-color: var(--navitem-hover-bg);
+  color: var(--navitem-hover-text);
+}
+
+.nav-item.active {
+  background-color: var(--navitem-active-bg);
+  color: var(--navitem-active-text);
+} 

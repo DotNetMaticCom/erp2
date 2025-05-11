@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Default tema CSS dosyalarını içe aktar */
+@import '/src/themes/default-theme/styles/components.css';
+
+
+/* @layer base { buradan kaldırıldı ve aşağıya taşındı */
+  :root {
+    /* === Typography === */
+    --font-family-base: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --text-xs: 0.75rem;     /* 12px */
+    --text-sm: 0.875rem;    /* 14px */
+    --text-base: 1rem;      /* 16px */
+    --text-lg: 1.125rem;    /* 18px */
+    --text-xl: 1.25rem;     /* 20px */
+    --text-2xl: 1.5rem;     /* 24px */
+    --text-3xl: 1.875rem;   /* 30px */
+    --text-4xl: 2.25rem;    /* 36px */
+    --text-5xl: 3rem;       /* 48px */
+    
+    --leading-tight: 1.15;
+    --leading-snug: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --leading-loose: 2;
+    
+    /* === Border Radius === */
+    --radius-xs: 0.125rem;  /* 2px */
+    --radius-sm: 0.25rem;   /* 4px */
+    --radius-md: 0.375rem;  /* 6px */
+    --radius-lg: 0.5rem;    /* 8px */
+    --radius-xl: 0.75rem;   /* 12px */
+    --radius: 0.5rem; /* Örnek bir radius değeri, projenize göre ayarlayın */
+
+    /* === Shadows === */
+    --shadow-card: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 0px 1px rgba(0, 0, 0, 0.07);
+    --shadow-card-hover: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-sidebar: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.08);
+    --shadow-dropdown: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-modal: 0px 20px 25px -5px rgba(0, 0, 0, 0.15), 0px 10px 10px -5px rgba(0, 0, 0, 0.06);
+    --shadow-inner: inset 0px 2px 4px rgba(0, 0, 0, 0.07);
+
+    /* === Transition Properties === */
+    --transition-fast: 150ms ease-out;
+    --transition-base: 200ms ease-out;
+    --transition-slow: 300ms ease-out;
+
+    /* ============================================= */
+    /* KATMAN 1: HAM TEMA HSL PARÇA DEĞİŞKENLERİ     */
+    /* ============================================= */
+    /* Bu değişkenler NewThemeProvider tarafından JS ile ayarlanacak */
+    /* Varsayılan (fallback) değerler olarak açık tema HSL parçalarını ekleyebilirsiniz */
+
+    /* Primary Renk Parçaları */
+    --tema-primary-h: 0;
+    --tema-primary-s: 0%;
+    --tema-primary-l: 20%;
+    --tema-primary-foreground-h: 0; /* Varsayılan H */
+    --tema-primary-foreground-s: 0%; /* Varsayılan S */
+    --tema-primary-foreground-l: 100%;
+
+    /* İkincil Renk Parçaları */
+    --tema-secondary-h: 0;
+    --tema-secondary-s: 0%;
+    --tema-secondary-l: 95%;
+    --tema-secondary-foreground-h: 0; /* Varsayılan H */
+    --tema-secondary-foreground-s: 0%; /* Varsayılan S */
+    --tema-secondary-foreground-l: 20%;
+
+    /* Vurgu Renk Parçaları */
+    --tema-accent-h: 0;
+    --tema-accent-s: 0%;
+    --tema-accent-l: 30%;
+    --tema-accent-foreground-h: 0; /* Varsayılan H */
+    --tema-accent-foreground-s: 0%; /* Varsayılan S */
+    --tema-accent-foreground-l: 100%;
+
+    /* Nötr Renk Skalası Parçaları */
+    --tema-neutral-default-h: 0;
+    --tema-neutral-default-s: 0%;
+
+    --tema-neutral-0-h: var(--tema-neutral-default-h); --tema-neutral-0-s: var(--tema-neutral-default-s); --tema-neutral-0-l: 100%;
+    --tema-neutral-50-h: var(--tema-neutral-default-h); --tema-neutral-50-s: var(--tema-neutral-default-s); --tema-neutral-50-l: 98%;
+    --tema-neutral-100-h: var(--tema-neutral-default-h); --tema-neutral-100-s: var(--tema-neutral-default-s); --tema-neutral-100-l: 96%;
+    --tema-neutral-200-h: var(--tema-neutral-default-h); --tema-neutral-200-s: var(--tema-neutral-default-s); --tema-neutral-200-l: 93%;
+    --tema-neutral-300-h: var(--tema-neutral-default-h); --tema-neutral-300-s: var(--tema-neutral-default-s); --tema-neutral-300-l: 85%;
+    --tema-neutral-400-h: var(--tema-neutral-default-h); --tema-neutral-400-s: var(--tema-neutral-default-s); --tema-neutral-400-l: 70%;
+    --tema-neutral-500-h: var(--tema-neutral-default-h); --tema-neutral-500-s: var(--tema-neutral-default-s); --tema-neutral-500-l: 60%;
+    --tema-neutral-600-h: var(--tema-neutral-default-h); --tema-neutral-600-s: var(--tema-neutral-default-s); --tema-neutral-600-l: 40%;
+    --tema-neutral-700-h: var(--tema-neutral-default-h); --tema-neutral-700-s: var(--tema-neutral-default-s); --tema-neutral-700-l: 30%;
+    --tema-neutral-800-h: var(--tema-neutral-default-h); --tema-neutral-800-s: var(--tema-neutral-default-s); --tema-neutral-800-l: 20%;
+    --tema-neutral-900-h: var(--tema-neutral-default-h); --tema-neutral-900-s: var(--tema-neutral-default-s); --tema-neutral-900-l: 10%;
+    --tema-neutral-950-h: var(--tema-neutral-default-h); --tema-neutral-950-s: var(--tema-neutral-default-s); --tema-neutral-950-l: 5%;
+
+    /* Durum Renkleri Parçaları */
+    --tema-success-h: 145; --tema-success-s: 63%; --tema-success-l: 42%;
+    --tema-success-foreground-h: var(--tema-neutral-default-h); --tema-success-foreground-s: var(--tema-neutral-default-s); --tema-success-foreground-l: 100%;
+
+    --tema-warning-h: 40; --tema-warning-s: 90%; --tema-warning-l: 55%;
+    --tema-warning-foreground-h: var(--tema-neutral-default-h); --tema-warning-foreground-s: var(--tema-neutral-default-s); --tema-warning-foreground-l: 10%;
+
+    --tema-destructive-h: 0; --tema-destructive-s: 72%; --tema-destructive-l: 51%;
+    --tema-destructive-foreground-h: var(--tema-neutral-default-h); --tema-destructive-foreground-s: var(--tema-neutral-default-s); --tema-destructive-foreground-l: 100%;
+
+    --tema-info-h: 200; --tema-info-s: 90%; --tema-info-l: 50%;
+    --tema-info-foreground-h: var(--tema-neutral-default-h); --tema-info-foreground-s: var(--tema-neutral-default-s); --tema-info-foreground-l: 100%;
+
+    /* ================================================= */
+    /* KATMAN 2: SEMANTİK (ANLAMSAL) RENK DEĞİŞKENLERİ */
+    /* ================================================= */
+    /* Bileşenler bu değişkenleri kullanır. Katman 1'i tüketirler. */
+
+    /* === Çekirdek Semantik Renkler === */
+    --renk-birincil: hsl(var(--tema-primary-h), var(--tema-primary-s), var(--tema-primary-l));
+    --renk-birincil-metin: hsl(var(--tema-primary-foreground-h, var(--tema-neutral-default-h)), var(--tema-primary-foreground-s, var(--tema-neutral-default-s)), var(--tema-primary-foreground-l));
+
+    --renk-ikincil: hsl(var(--tema-secondary-h), var(--tema-secondary-s), var(--tema-secondary-l));
+    --renk-ikincil-metin: hsl(var(--tema-secondary-foreground-h, var(--tema-neutral-default-h)), var(--tema-secondary-foreground-s, var(--tema-neutral-default-s)), var(--tema-secondary-foreground-l));
+
+    --renk-vurgu: hsl(var(--tema-accent-h), var(--tema-accent-s), var(--tema-accent-l));
+    --renk-vurgu-metin: hsl(var(--tema-accent-foreground-h, var(--tema-neutral-default-h)), var(--tema-accent-foreground-s, var(--tema-neutral-default-s)), var(--tema-accent-foreground-l));
+
+    /* === Nötr Skala Semantik Renkleri === */
+    --renk-neutral-0: hsl(var(--tema-neutral-0-h, var(--tema-neutral-default-h)), var(--tema-neutral-0-s, var(--tema-neutral-default-s)), var(--tema-neutral-0-l));
+    --renk-neutral-50: hsl(var(--tema-neutral-50-h, var(--tema-neutral-default-h)), var(--tema-neutral-50-s, var(--tema-neutral-default-s)), var(--tema-neutral-50-l));
+    --renk-neutral-100: hsl(var(--tema-neutral-100-h, var(--tema-neutral-default-h)), var(--tema-neutral-100-s, var(--tema-neutral-default-s)), var(--tema-neutral-100-l));
+    --renk-neutral-200: hsl(var(--tema-neutral-200-h, var(--tema-neutral-default-h)), var(--tema-neutral-200-s, var(--tema-neutral-default-s)), var(--tema-neutral-200-l));
+    --renk-neutral-300: hsl(var(--tema-neutral-300-h, var(--tema-neutral-default-h)), var(--tema-neutral-300-s, var(--tema-neutral-default-s)), var(--tema-neutral-300-l));
+    --renk-neutral-400: hsl(var(--tema-neutral-400-h, var(--tema-neutral-default-h)), var(--tema-neutral-400-s, var(--tema-neutral-default-s)), var(--tema-neutral-400-l));
+    --renk-neutral-500: hsl(var(--tema-neutral-500-h, var(--tema-neutral-default-h)), var(--tema-neutral-500-s, var(--tema-neutral-default-s)), var(--tema-neutral-500-l));
+    --renk-neutral-600: hsl(var(--tema-neutral-600-h, var(--tema-neutral-default-h)), var(--tema-neutral-600-s, var(--tema-neutral-default-s)), var(--tema-neutral-600-l));
+    --renk-neutral-700: hsl(var(--tema-neutral-700-h, var(--tema-neutral-default-h)), var(--tema-neutral-700-s, var(--tema-neutral-default-s)), var(--tema-neutral-700-l));
+    --renk-neutral-800: hsl(var(--tema-neutral-800-h, var(--tema-neutral-default-h)), var(--tema-neutral-800-s, var(--tema-neutral-default-s)), var(--tema-neutral-800-l));
+    --renk-neutral-900: hsl(var(--tema-neutral-900-h, var(--tema-neutral-default-h)), var(--tema-neutral-900-s, var(--tema-neutral-default-s)), var(--tema-neutral-900-l));
+    --renk-neutral-950: hsl(var(--tema-neutral-950-h, var(--tema-neutral-default-h)), var(--tema-neutral-950-s, var(--tema-neutral-default-s)), var(--tema-neutral-950-l));
+
+    /* === Genel Kullanım Semantik Renkleri === */
+    --renk-arkaplan-sayfa: var(--renk-neutral-50);
+    --renk-metin-ana: var(--renk-neutral-900);
+    --renk-metin-soluk: var(--renk-neutral-600);
+    --renk-kenarlik-varsayilan: var(--renk-neutral-300);
+    --renk-halka-odak: var(--renk-birincil);
+
+    --renk-arkaplan-kart: var(--renk-neutral-0);
+    --renk-metin-kart-uzerine: var(--renk-metin-ana);
+
+    --renk-arkaplan-input: var(--renk-neutral-100);
+    --renk-arkaplan-soluk: var(--renk-neutral-100);
+
+    /* === Durum Semantik Renkleri === */
+    --renk-basari: hsl(var(--tema-success-h), var(--tema-success-s), var(--tema-success-l));
+    --renk-basari-metin: hsl(var(--tema-success-foreground-h, var(--tema-neutral-default-h)), var(--tema-success-foreground-s, var(--tema-neutral-default-s)), var(--tema-success-foreground-l));
+
+    --renk-uyari: hsl(var(--tema-warning-h), var(--tema-warning-s), var(--tema-warning-l));
+    --renk-uyari-metin: hsl(var(--tema-warning-foreground-h, var(--tema-neutral-default-h)), var(--tema-warning-foreground-s, var(--tema-neutral-default-s)), var(--tema-warning-foreground-l));
+
+    --renk-yikici: hsl(var(--tema-destructive-h), var(--tema-destructive-s), var(--tema-destructive-l));
+    --renk-yikici-metin: hsl(var(--tema-destructive-foreground-h, var(--tema-neutral-default-h)), var(--tema-destructive-foreground-s, var(--tema-neutral-default-s)), var(--tema-destructive-foreground-l));
+
+    --renk-bilgi: hsl(var(--tema-info-h), var(--tema-info-s), var(--tema-info-l));
+    --renk-bilgi-metin: hsl(var(--tema-info-foreground-h, var(--tema-neutral-default-h)), var(--tema-info-foreground-s, var(--tema-neutral-default-s)), var(--tema-info-foreground-l));
+
+    /* === ESKİ CSS Değişkenleriniz (UYUMLULUK & GEÇİŞ İÇİN) === */
+    --background: var(--renk-arkaplan-sayfa);
+    --foreground: var(--renk-metin-ana);
+    --primary: var(--renk-birincil);
+    --primary-foreground: var(--renk-birincil-metin);
+    --card: var(--renk-arkaplan-kart);
+    --card-foreground: var(--renk-metin-kart-uzerine);
+    --popover: var(--renk-arkaplan-kart);
+    --popover-foreground: var(--renk-metin-kart-uzerine);
+    --secondary: var(--renk-ikincil);
+    --secondary-foreground: var(--renk-ikincil-metin);
+    --muted: var(--renk-arkaplan-soluk);
+    --muted-foreground: var(--renk-metin-soluk);
+    --accent: var(--renk-vurgu);
+    --accent-foreground: var(--renk-vurgu-metin);
+    --destructive: var(--renk-yikici);
+    --destructive-foreground: var(--renk-yikici-metin);
+    --border: var(--renk-kenarlik-varsayilan);
+    --input: var(--renk-arkaplan-input);
+    --ring: var(--renk-halka-odak);
+
+    /* Eski --color-* değişkenleri temizlendi.
+       Yönlendirmeler ve açıklamalar kod tabanının önceki versiyonlarında mevcuttu.
+       Mevcut sistem --renk-* ve --tema-* değişkenlerini kullanmaktadır.
+    */
+
+    /* Component-specific colors (for backwards compatibility) - Bunlar da zamanla yeni sisteme geçirilmeli */
+    --sidebar-background: var(--renk-arkaplan-kart); /* Örnek yönlendirme */
+    --sidebar-foreground: var(--renk-metin-kart-uzerine); /* Örnek yönlendirme */
+    --sidebar-primary: var(--renk-birincil);
+    --sidebar-primary-foreground: var(--renk-birincil-metin);
+    --sidebar-accent: var(--renk-ikincil);
+    --sidebar-accent-foreground: var(--renk-ikincil-metin);
+    --sidebar-border: var(--renk-kenarlik-varsayilan);
+    --sidebar-ring: var(--renk-halka-odak);
+    
+    --navitem-hover-bg: var(--renk-neutral-100);
+    --navitem-hover-text: var(--renk-birincil);
+    --navitem-active-bg: var(--renk-birincil);
+    --navitem-active-text: var(--renk-birincil-metin);
+    
+    --dashboard-card-bg: var(--renk-arkaplan-kart);
+    --dashboard-card-hover-bg: var(--renk-neutral-100); /* Veya daha açık bir nötr */
+    --dashboard-accent: var(--renk-vurgu);
+    --dashboard-accent-hover: hsl(var(--tema-accent-h), var(--tema-accent-s), calc(var(--tema-accent-l) - 5%)); /* Vurgu renginin biraz koyusu */
+    --dashboard-border: var(--renk-kenarlik-varsayilan);
+    --dashboard-muted-bg: var(--renk-arkaplan-soluk);
+    --dashboard-text: var(--renk-metin-ana);
+    --dashboard-text-muted: var(--renk-metin-soluk);
+    
+    /* Brand Colors (for backwards compatibility) - Bunlar da zamanla yeni sisteme geçirilmeli */
+    --brand-light-green-hsl: 120 60% 70%; /* Örnek değer, projenize göre güncelleyin */
+    --brand-medium-green-hsl: 120 60% 50%; /* Örnek değer */
+    --brand-dark-green-hsl: 120 60% 30%; /* Örnek değer */
+    
+    --purple-accent-hsl: 270 60% 50%; /* Örnek değer */
+    --gray-text: var(--renk-metin-soluk);
+  }
+
+  .dark {
+    /* Koyu modda sadece SEMANTİK değişkenlerin değerleri değişir,
+       çünkü --tema-* değişkenleri zaten JS tarafından koyu mod HSL parçalarıyla set edilecek.
+    */
+    --renk-arkaplan-sayfa: var(--renk-neutral-900);
+    --renk-metin-ana: var(--renk-neutral-100);
+    --renk-metin-soluk: var(--renk-neutral-400);
+    --renk-kenarlik-varsayilan: var(--renk-neutral-700);
+
+    --renk-arkaplan-kart: var(--renk-neutral-800); /* Daha koyu kart arkaplanı */
+    --renk-metin-kart-uzerine: var(--renk-metin-ana); /* Kart metni ana metinle aynı */
+
+    --renk-arkaplan-input: var(--renk-neutral-800); /* Input için daha koyu arkaplan */
+    --renk-arkaplan-soluk: hsl(var(--tema-neutral-default-h), var(--tema-neutral-default-s), calc(var(--tema-neutral-800-l) + 5%)); /* --renk-neutral-800'den biraz daha açık, örn: neutral-850 gibi */
+
+
+    /* Eski değişkenlerin koyu mod karşılıkları */
+    --background: var(--renk-arkaplan-sayfa);
+    --foreground: var(--renk-metin-ana);
+    --primary: var(--renk-birincil); /* JS tarafından ayarlanacak --tema-primary-* değerlerini kullanır */
+    --primary-foreground: var(--renk-birincil-metin); /* JS tarafından ayarlanacak --tema-primary-foreground-* değerlerini kullanır */
+    --card: var(--renk-arkaplan-kart);
+    --card-foreground: var(--renk-metin-kart-uzerine);
+    --popover: var(--renk-arkaplan-kart);
+    --popover-foreground: var(--renk-metin-kart-uzerine);
+    --secondary: var(--renk-ikincil);
+    --secondary-foreground: var(--renk-ikincil-metin);
+    --muted: var(--renk-arkaplan-soluk);
+    --muted-foreground: var(--renk-metin-soluk);
+    --accent: var(--renk-vurgu);
+    --accent-foreground: var(--renk-vurgu-metin);
+    --destructive: var(--renk-yikici);
+    --destructive-foreground: var(--renk-yikici-metin);
+    --border: var(--renk-kenarlik-varsayilan);
+    --input: var(--renk-arkaplan-input);
+    --ring: var(--renk-halka-odak); /* Genellikle birincil renkle aynı kalır veya JS ile ayarlanır */
+
+    /* Component-specific dark mode overrides */
+    --sidebar-background: var(--renk-arkaplan-kart);
+    --sidebar-foreground: var(--renk-metin-kart-uzerine);
+    --sidebar-border: var(--renk-kenarlik-varsayilan);
+    
+    --navitem-hover-bg: hsl(var(--tema-neutral-default-h), var(--tema-neutral-default-s), calc(var(--tema-neutral-700-l) + 5%)); /* neutral-700'den biraz açık */
+    --navitem-hover-text: var(--renk-birincil); /* Koyu temada birincil metin rengi */
+    --navitem-active-bg: var(--renk-birincil);
+    --navitem-active-text: var(--renk-birincil-metin);
+
+    --dashboard-card-hover-bg: hsl(var(--tema-neutral-default-h), var(--tema-neutral-default-s), calc(var(--tema-neutral-800-l) + 5%)); /* neutral-800'den biraz açık */
+    --dashboard-accent-hover: hsl(var(--tema-accent-h), var(--tema-accent-s), calc(var(--tema-accent-l) + 10%)); /* Vurgu renginin biraz açığı (koyu temada) */
+  }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base { /* @layer base buraya taşındı */
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: var(--font-family-base);
+  }
+}
+
+/* Component Classes with Micro-interactions */
+@layer components {
+  /* Button Components */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md font-medium transition-all;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn:focus-visible {
+    @apply outline-none ring-2 ring-offset-2 ring-ring;
+  }
+  
+  .btn:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+  
+  /* Navigation Items with refined micro-interactions */
+  .nav-item {
+    @apply flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all;
+    transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+  }
+  
+  .nav-item:hover {
+    @apply bg-[var(--navitem-hover-bg)] text-[var(--navitem-hover-text)];
+    transform: translateX(2px);
+  }
+  
+  .nav-item.active {
+    @apply bg-[var(--navitem-active-bg)] text-[var(--navitem-active-text)];
+  }
+  
+  /* Card components */
+  .dashboard-card {
+    @apply bg-card rounded-xl border-border shadow-card transition-all; /* bg-dashboard-card yerine bg-card, border-dashboard-border yerine border-border */
+    transition: box-shadow var(--transition-base), transform var(--transition-base);
+  }
+  
+  .dashboard-card:hover {
+    @apply shadow-card-hover;
+    transform: translateY(-2px);
+  }
+  
+  .dashboard-stat-card {
+    @apply dashboard-card p-5 flex flex-col gap-2;
+  }
+  
+  .dashboard-table-card {
+    @apply dashboard-card overflow-hidden;
+  }
+
+  /* Sidebar Icon Button */
+  .sidebar-icon-button {
+    @apply w-10 h-10 flex items-center justify-center rounded-lg transition-all;
+    transition: background-color var(--transition-fast), 
+                color var(--transition-fast), 
+                transform var(--transition-fast),
+                box-shadow var(--transition-fast);
+  }
+  
+  .sidebar-icon-button:hover {
+    @apply transform scale-105 text-primary;
+  }
+  
+  .sidebar-icon-button.active {
+    @apply bg-primary text-primary-foreground shadow-md scale-105; /* text-white yerine text-primary-foreground */
+  }
+  
+  .sidebar-icon-button:not(.active) {
+    @apply text-muted-foreground hover:bg-[var(--navitem-hover-bg)] hover:text-primary hover:shadow;
+  }
+  
+  /* Form Elements */
+  input, textarea, select {
+    @apply transition-colors duration-150 bg-input text-foreground border-border; /* Arkaplan, metin ve kenarlık eklendi */
+  }
+  
+  /* Link underline animation */
+  .link-hover {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:origin-bottom-right after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100;
+  }
+
+  /* Fade in animation for elements */
+  .fade-in {
+    @apply animate-fade-in;
+  }
+  
+  /* Scale animation for clickable items */
+  .scale-hover {
+    @apply transition-transform duration-150 hover:scale-[1.02] active:scale-[0.98];
+  }
+}
+
+/* Reset #root styles */
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
