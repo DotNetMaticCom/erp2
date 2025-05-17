@@ -1,4 +1,3 @@
-import React from "react";
 import { cn } from "@/lib/utils";
 
 interface NavItemProps {
@@ -10,14 +9,14 @@ interface NavItemProps {
   className?: string;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ 
-  icon, 
-  text, 
-  active, 
-  badge, 
+export default function NavItem({
+  icon,
+  text,
+  active,
+  badge,
   onClick,
-  className 
-}) => {
+  className
+}: NavItemProps) {
   return (
     <button
       className={cn(
@@ -49,6 +48,4 @@ const NavItem: React.FC<NavItemProps> = ({
       )}
     </button>
   );
-};
-
-export default NavItem;
+  }

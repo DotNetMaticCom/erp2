@@ -1,8 +1,7 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-const NotFound: React.FC = () => {
+export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-muted">
       <div className="text-center p-8">
@@ -14,6 +13,4 @@ const NotFound: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default NotFound;
+}

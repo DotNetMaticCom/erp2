@@ -1,4 +1,3 @@
-import React from "react";
 import SidebarSection from "./SidebarSection";
 import { SidebarSection as SidebarSectionType } from "../data/sidebarData";
 import { ChevronDown, Settings, ChevronLeft } from "lucide-react";
@@ -15,7 +14,7 @@ interface SidebarMainContentProps {
   toggleMainContent?: () => void;
 }
 
-const SidebarMainContent: React.FC<SidebarMainContentProps> = ({
+export default function SidebarMainContent({
   sectionStates,
   toggleSection,
   expandAll,
@@ -25,7 +24,7 @@ const SidebarMainContent: React.FC<SidebarMainContentProps> = ({
   minusIcon,
   activeIconTitle = "Dashboard",
   toggleMainContent
-}) => {
+}: SidebarMainContentProps) {
   // Helper function to get the state key for a section
   const getSectionStateKey = (title: string): string => {
     const keyMap: { [key: string]: string } = {
@@ -102,6 +101,4 @@ const SidebarMainContent: React.FC<SidebarMainContentProps> = ({
       </div>
     </div>
   );
-};
-
-export default SidebarMainContent;
+}

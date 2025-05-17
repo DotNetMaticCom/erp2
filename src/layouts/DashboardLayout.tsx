@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -10,10 +10,10 @@ interface DashboardLayoutProps {
   title?: string;
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ 
-  children, 
-  title = "Dashboard" 
-}) => {
+export default function DashboardLayout({
+  children,
+  title = "Dashboard"
+}: DashboardLayoutProps) {
   const [isSidebarMainVisible, setIsSidebarMainVisible] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
@@ -68,6 +68,4 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
       <Toaster position="top-right" />
     </div>
   );
-};
-
-export default DashboardLayout;
+}

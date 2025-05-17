@@ -1,5 +1,5 @@
 // src/themes/ThemeProvider.tsx
-import React, { createContext, useContext, useEffect, useState, useCallback, ReactNode, useRef } from 'react'; // ReactNode ve useRef eklendi
+import { createContext, useContext, useEffect, useState, useCallback, type ReactNode, useRef } from 'react';
 import type { AppThemeConfig, RawThemeHSLParts } from './theme-types'; // Yeni tipler
 import { getAppThemeConfig, allAppThemes, saveThemePreference, loadThemePreference, isSystemDarkMode, watchSystemTheme } from './index'; // Merkezi tema yönetimi ve yardımcı fonksiyonlar
 
@@ -33,7 +33,6 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 function applyCoreHSLPartsToDOM(hslParts: RawThemeHSLParts) {
-  console.log('[ThemeProvider] applyCoreHSLPartsToDOM çağrıldı. HSL Parçaları:', hslParts);
   const rootStyle = document.documentElement.style;
   // Önceki tema değişkenlerini temizlemek (opsiyonel ama iyi pratik)
   // Bilinen tüm --tema-* değişkenlerini null yaparak veya her temanın tüm --tema-* değişkenlerini tanımladığından emin olarak.
@@ -52,7 +51,6 @@ function applyCoreHSLPartsToDOM(hslParts: RawThemeHSLParts) {
         const cssVarName = `--tema-${key}`;
         // RawThemeHSLParts'daki key'ler 'primary-h' formatında, CSS değişkenleri '--tema-primary-h' olmalı
         rootStyle.setProperty(cssVarName, value);
-        console.log(`[ThemeProvider] DOM'a yazıldı: ${cssVarName} = ${value}`);
       }
     }
   }
@@ -60,30 +58,25 @@ function applyCoreHSLPartsToDOM(hslParts: RawThemeHSLParts) {
 
 // NewThemeProvider adını ThemeProvider olarak değiştirebilirsiniz veya NewThemeProvider olarak kalabilir.
 // Kullanıcı isteğinde NewThemeProvider olarak belirtilmiş.
-export const NewThemeProvider: React.FC<ThemeProviderProps> = ({
+export function NewThemeProvider({
   children,
   defaultTheme: propDefaultTheme = initialDefaultThemeName, // props'tan gelen defaultTheme
   storageKey = 'theme-preference', // props'tan gelen storageKey
   respectSystemPreference = true, // props'tan gelen respectSystemPreference
-}) => {
-  console.log('[ThemeProvider] NewThemeProvider başlatılıyor. Props:', { propDefaultTheme, storageKey, respectSystemPreference });
+}: ThemeProviderProps) {
   const [currentThemeConfig, setCurrentThemeConfig] = useState<AppThemeConfig>(() => {
     const savedThemeName = loadThemePreference(); // storageKey kullanılabilir
-    console.log('[ThemeProvider] useState initial. Kayıtlı tema adı:', savedThemeName);
     if (savedThemeName) {
       const theme = getAppThemeConfig(savedThemeName) || initialDefaultConfig;
-      console.log('[ThemeProvider] useState initial. Kayıtlı temadan yüklendi:', theme.name);
       return theme;
     }
     const theme = getAppThemeConfig(propDefaultTheme) || initialDefaultConfig;
-    console.log('[ThemeProvider] useState initial. Varsayılan (prop) temadan yüklendi:', theme.name);
     return theme;
   });
 
   const activeThemeNameRef = useRef<string | null>(null);
 
   const setActiveTheme = useCallback((newConfig: AppThemeConfig) => {
-    console.log(`[ThemeProvider] setActiveTheme çağrıldı. Yeni tema: ${newConfig.name}, Koyu Mod: ${newConfig.isDark}`);
     
     const newThemeClassName = `theme-${newConfig.name}`;
 
@@ -94,83 +87,64 @@ export const NewThemeProvider: React.FC<ThemeProviderProps> = ({
     allAppThemes.forEach(theme => {
       rootClassList.remove(`theme-${theme.name}`);
     });
-    console.log('[ThemeProvider] Tüm bilinen `theme-*` sınıfları kaldırıldı (denendi).');
 
     // Yeni tema sınıfını ekle
     rootClassList.add(newThemeClassName);
     activeThemeNameRef.current = newThemeClassName; // Şu anda aktif olan tema sınıfına ref'i güncelle
-    console.log(`[ThemeProvider] Yeni tema sınıfı eklendi: ${newThemeClassName}`);
 
     // .dark sınıfını yönet
     if (newConfig.isDark) {
       document.documentElement.classList.add('dark');
-      console.log('[ThemeProvider] .dark sınıfı eklendi.');
     } else {
       document.documentElement.classList.remove('dark');
-      console.log('[ThemeProvider] .dark sınıfı kaldırıldı.');
     }
     
-    console.log(`[ThemeProvider] document.documentElement.classList güncellendi: '${Array.from(document.documentElement.classList).join(' ')}'`);
 
     applyCoreHSLPartsToDOM(newConfig.coreHSLParts);
 
     saveThemePreference(newConfig.name); // storageKey kullanılabilir
-    console.log(`[ThemeProvider] Tema tercihi kaydedildi: ${newConfig.name}`);
     setCurrentThemeConfig(newConfig);
-    console.log('[ThemeProvider] currentThemeConfig güncellendi:', newConfig.name);
   }, []);
 
 
   useEffect(() => {
-    console.log('[ThemeProvider] Ana useEffect tetiklendi. Bağımlılıklar:', { propDefaultTheme, respectSystemPreference, currentThemeName: currentThemeConfig.name, currentThemeIsDark: currentThemeConfig.isDark });
     const savedThemeName = loadThemePreference(); // storageKey kullanılabilir
     const systemPrefersDark = isSystemDarkMode();
     let themeToLoad: AppThemeConfig | undefined;
-    console.log('[ThemeProvider] useEffect: Kayıtlı tema:', savedThemeName, 'Sistem koyu modu tercih ediyor mu?:', systemPrefersDark);
 
 
     if (savedThemeName) {
       themeToLoad = getAppThemeConfig(savedThemeName);
-      console.log('[ThemeProvider] useEffect: Kayıtlı tema yüklenecek:', themeToLoad?.name);
     } else if (respectSystemPreference && systemPrefersDark) {
       const darkVersionName = propDefaultTheme.includes('-light')
         ? propDefaultTheme.replace('-light', '-dark')
         : `${propDefaultTheme}-dark`;
       themeToLoad = allAppThemes.find(t => t.name === darkVersionName && t.isDark) || allAppThemes.find(t => t.isDark);
-      console.log('[ThemeProvider] useEffect: Sistem tercihi (koyu) için tema yüklenecek:', themeToLoad?.name, '(Aranan:', darkVersionName, ')');
     }
 
     const finalThemeToLoad = themeToLoad || getAppThemeConfig(propDefaultTheme) || initialDefaultConfig;
-    console.log('[ThemeProvider] useEffect: Son yüklenecek tema:', finalThemeToLoad.name);
     setActiveTheme(finalThemeToLoad);
 
     let unwatch: (() => void) | undefined;
     if (respectSystemPreference && !savedThemeName) {
-      console.log('[ThemeProvider] useEffect: Sistem teması değişiklikleri izleniyor.');
       unwatch = watchSystemTheme((isDark) => {
-        console.log(`[ThemeProvider] Sistem teması değişti. Yeni durum (koyu mu?): ${isDark}`);
         if (!loadThemePreference()) { // Kullanıcı manuel seçim yapmadıysa
-            console.log('[ThemeProvider] Kullanıcı manuel seçim yapmamış, sistem teması uygulanacak.');
             const currentBaseName = currentThemeConfig.name.replace(currentThemeConfig.isDark ? "-dark" : "-light", "");
             const newSystemThemeName = isDark ? `${currentBaseName}-dark` : `${currentBaseName}-light`;
             let newSystemThemeConfig = getAppThemeConfig(newSystemThemeName);
-            console.log(`[ThemeProvider] Sistem için yeni tema adı denemesi: ${newSystemThemeName}, Bulunan: ${newSystemThemeConfig?.name}`);
 
             if (!newSystemThemeConfig) { // Eğer spesifik light/dark versiyonu yoksa, genel bir tane bul
                  newSystemThemeConfig = isDark
                     ? allAppThemes.find(t => t.isDark)
                     : allAppThemes.find(t => !t.isDark);
-                console.log(`[ThemeProvider] Spesifik versiyon bulunamadı, genel ${isDark ? 'koyu' : 'açık'} tema arandı: ${newSystemThemeConfig?.name}`);
             }
             setActiveTheme(newSystemThemeConfig || initialDefaultConfig);
         } else {
-            console.log('[ThemeProvider] Kullanıcı manuel seçim yapmış, sistem teması değişikliği göz ardı edildi.');
         }
       });
     }
     return () => {
         if (unwatch) {
-            console.log('[ThemeProvider] useEffect temizleniyor, sistem teması izleyicisi kaldırılıyor.');
             unwatch();
         }
     };
@@ -180,7 +154,6 @@ export const NewThemeProvider: React.FC<ThemeProviderProps> = ({
   }, [propDefaultTheme, respectSystemPreference, setActiveTheme]); // Basitleştirilmiş bağımlılıklar
 
   const setThemeByName = useCallback((themeName: string) => {
-    console.log(`[ThemeProvider] setThemeByName çağrıldı. İstenen tema: ${themeName}`);
     const newConfig = getAppThemeConfig(themeName);
     if (newConfig) {
       setActiveTheme(newConfig);
@@ -190,33 +163,24 @@ export const NewThemeProvider: React.FC<ThemeProviderProps> = ({
   }, [setActiveTheme]);
 
   const toggleDarkMode = useCallback(() => {
-    console.log(`[ThemeProvider] toggleDarkMode çağrıldı. Mevcut tema: ${currentThemeConfig.name}, Koyu Mod: ${currentThemeConfig.isDark}`);
     const currentBaseName = currentThemeConfig.name.replace(currentThemeConfig.isDark ? "-dark" : "-light", "");
     const targetThemeName = currentThemeConfig.isDark ? `${currentBaseName}-light` : `${currentBaseName}-dark`;
-    console.log(`[ThemeProvider] Hedeflenen tema adı (ilk deneme): ${targetThemeName}`);
 
     let targetConfig = getAppThemeConfig(targetThemeName);
 
     if (!targetConfig) {
-        console.log(`[ThemeProvider] '${targetThemeName}' bulunamadı, alternatifler aranıyor.`);
         targetConfig = currentThemeConfig.isDark
             ? allAppThemes.find(t => t.name.startsWith(currentBaseName) && !t.isDark) || allAppThemes.find(t => !t.isDark && !t.name.startsWith(currentBaseName))
             : allAppThemes.find(t => t.name.startsWith(currentBaseName) && t.isDark) || allAppThemes.find(t => t.isDark && !t.name.startsWith(currentBaseName));
-        console.log(`[ThemeProvider] Alternatif arama sonucu (aynı baz isimli farklı mod): ${targetConfig?.name}`);
     }
     
     if (!targetConfig && currentThemeConfig.isDark) { // Genel bir açık tema bul
-        console.log(`[ThemeProvider] Hala hedef bulunamadı, genel bir açık tema aranıyor.`);
         targetConfig = allAppThemes.find(t => !t.isDark) || initialDefaultConfig;
-        console.log(`[ThemeProvider] Genel açık tema arama sonucu: ${targetConfig?.name}`);
     } else if (!targetConfig && !currentThemeConfig.isDark) { // Genel bir koyu tema bul
-        console.log(`[ThemeProvider] Hala hedef bulunamadı, genel bir koyu tema aranıyor.`);
         targetConfig = allAppThemes.find(t => t.isDark) || initialDefaultConfig;
-        console.log(`[ThemeProvider] Genel koyu tema arama sonucu: ${targetConfig?.name}`);
     }
 
     if (targetConfig) {
-      console.log(`[ThemeProvider] toggleDarkMode: Hedef tema bulundu ve ayarlanacak: ${targetConfig.name}`);
       setActiveTheme(targetConfig);
     } else {
         console.warn(`[ThemeProvider] toggleDarkMode: Geçiş yapılacak uygun tema bulunamadı. Mevcut: ${currentThemeConfig.name}. Fallback uygulanıyor.`);
@@ -225,13 +189,12 @@ export const NewThemeProvider: React.FC<ThemeProviderProps> = ({
     }
   }, [currentThemeConfig, setActiveTheme]);
 
-  console.log(`[ThemeProvider] Render. Mevcut tema: ${currentThemeConfig.name}, Koyu Mod: ${currentThemeConfig.isDark}`);
   return (
     <ThemeContext.Provider value={{ currentThemeConfig, setTheme: setThemeByName, isDarkMode: currentThemeConfig.isDark, toggleDarkMode, themes: allAppThemes }}>
       {children}
     </ThemeContext.Provider>
   );
-};
+}
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);

@@ -1,7 +1,6 @@
-import React from 'react';
 import { useTheme } from '../themes/ThemeProvider';
 
-const ThemeSwitcher: React.FC = () => {
+export default function ThemeSwitcher() {
   const { isDarkMode, toggleDarkMode, currentTheme, setTheme } = useTheme();
 
   return (
@@ -54,6 +53,4 @@ const ThemeSwitcher: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default ThemeSwitcher; 
+}

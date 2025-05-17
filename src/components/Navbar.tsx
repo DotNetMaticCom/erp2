@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, ChevronDown, BellRing, Search, Sun, Moon } from "lucide-react"; // Sun ve Moon eklendi
 import { cn } from "@/lib/utils";
@@ -23,13 +22,13 @@ interface NavbarProps {
   isSidebarOpen?: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ 
+export default function Navbar({
   className,
   title = "Dashboard",
   showTitle = true,
   onToggleSidebar,
   isSidebarOpen = true,
-}) => {
+}: NavbarProps) {
   const navigate = useNavigate();
   const { isDarkMode, toggleDarkMode } = useTheme(); // Yeni hook'tan isDarkMode ve toggleDarkMode alındı
 
@@ -161,6 +160,4 @@ const Navbar: React.FC<NavbarProps> = ({
       </div>
     </header>
   );
-};
-
-export default Navbar;
+}
