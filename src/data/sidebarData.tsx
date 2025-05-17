@@ -1,4 +1,4 @@
-import React from "react";
+import type { ReactNode } from "react";
 import {
   LayoutDashboard,
   Home,
@@ -15,13 +15,13 @@ import {
 
 // Define the type for sidebar icon items
 export interface SidebarIconItem {
-  icon: React.ReactNode;
+  icon: ReactNode;
   title: string;
 }
 
 // Define the type for sidebar section items
 export interface SidebarSectionItem {
-  icon: React.ReactNode;
+  icon: ReactNode;
   text: string;
   active?: boolean;
   badge?: number;

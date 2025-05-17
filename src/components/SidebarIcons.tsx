@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; // required for cloneElement
 import { Shield } from "lucide-react";
 import { SidebarIconItem } from "../data/sidebarData";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -11,12 +11,12 @@ interface SidebarIconsProps {
   onIconClick?: () => void;
 }
 
-const SidebarIcons: React.FC<SidebarIconsProps> = ({
+export default function SidebarIcons({
   icons,
   activeIconIndex,
   setActiveIconIndex,
   onIconClick
-}) => {
+}: SidebarIconsProps) {
   const handleIconClick = (index: number) => {
     setActiveIconIndex(index);
     if (onIconClick) {
@@ -63,6 +63,4 @@ const SidebarIcons: React.FC<SidebarIconsProps> = ({
       </div>
     </TooltipProvider>
   );
-};
-
-export default SidebarIcons;
+}

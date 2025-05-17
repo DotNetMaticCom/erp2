@@ -47,7 +47,6 @@ export function useThemeState({
 
   // Set base theme handler with localStorage persistence
   const setBaseTheme = (newBaseTheme: BaseThemeName) => {
-    console.log("[useThemeState] Setting base theme to:", newBaseTheme);
     localStorage.setItem(storageKeyBaseTheme, newBaseTheme);
     setBaseThemeState(newBaseTheme);
     setIsCustomThemeActive(newBaseTheme === "custom");
@@ -55,14 +54,12 @@ export function useThemeState({
 
   // Set theme variant handler with localStorage persistence
   const setThemeVariant = (newVariant: ThemeVariant) => {
-    console.log("[useThemeState] Setting theme variant to:", newVariant);
     localStorage.setItem(storageKeyThemeVariant, newVariant);
     setThemeVariantState(newVariant);
   };
 
   // Set font handler with localStorage persistence
   const setSelectedFontCssName = (fontCssName: string) => {
-    console.log("[useThemeState] Setting font to:", fontCssName);
     localStorage.setItem(storageKeyFontFamily, fontCssName);
     setSelectedFontCssNameState(fontCssName);
   };

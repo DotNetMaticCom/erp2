@@ -1,13 +1,10 @@
-import React from "react";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import DashboardContent from "@/components/DashboardContent";
 
-const Index = () => {
+export default function Index() {
   return (
     <DashboardLayout>
       <DashboardContent />
     </DashboardLayout>
   );
-};
-
-export default Index;
+}

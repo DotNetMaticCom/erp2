@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import SidebarIcons from "./SidebarIcons";
 import SidebarMainContent from "./SidebarMainContent";
 import { sidebarIcons, iconContent } from "../data/sidebarData";
@@ -12,10 +12,10 @@ interface SidebarProps {
   toggleMainContent?: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ 
+export default function Sidebar({
   isMainContentVisible = true,
   toggleMainContent
-}) => {
+}: SidebarProps) {
   const [activeIconIndex, setActiveIconIndex] = useState(0);
   const { sectionStates, toggleSection, expandAll, collapseAll } = useSidebarState();
   
@@ -87,6 +87,4 @@ const Sidebar: React.FC<SidebarProps> = ({
       </AnimatePresence>
     </div>
   );
-};
-
-export default Sidebar;
+}

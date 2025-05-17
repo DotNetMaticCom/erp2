@@ -1,11 +1,11 @@
-import React from "react";
+import type { ReactNode } from "react";
 import NavItem from "./NavItem";
 import { Plus, Minus } from "lucide-react";
 
 interface SidebarSectionProps {
   title: string;
   items: Array<{
-    icon: React.ReactNode;
+    icon: ReactNode;
     text: string;
     active?: boolean;
     badge?: number;
@@ -17,7 +17,7 @@ interface SidebarSectionProps {
   isLastSection: boolean;
 }
 
-const SidebarSection: React.FC<SidebarSectionProps> = ({
+export default function SidebarSection({
   title,
   items,
   isOpen,
@@ -25,7 +25,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
   plusIcon,
   minusIcon,
   isLastSection
-}) => {
+}: SidebarSectionProps) {
   return (
     <div className="mb-4">
       <div 
@@ -62,6 +62,5 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
       )}
     </div>
   );
-};
+  }
 
-export default SidebarSection;

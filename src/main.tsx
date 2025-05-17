@@ -1,11 +1,11 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { NewThemeProvider } from './themes'; // ThemeProvider importu
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <StrictMode>
     <NewThemeProvider
       defaultTheme="default-light" // Varsayılan tema adı
       storageKey="theme-preference"    // localStorage anahtarı
@@ -13,5 +13,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     >
       <App />
     </NewThemeProvider>
-  </React.StrictMode>
+  </StrictMode>
 );
